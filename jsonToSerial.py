@@ -2,7 +2,7 @@ import serial
 import json
 from time import sleep
 
-with open("jsonBeats.txt", "r") as f:
+with open("jsonBeats.txt", "r") as f: # select beat from 'jsonBeats.txt'
 	beat = json.load(f)
 	beatName = input("which beat?\n Beats: {0}\n> ".format(str(list(beat.keys()))))
 	while True:
@@ -14,10 +14,10 @@ with open("jsonBeats.txt", "r") as f:
 
 del (beatName)
 
-sleepyTime = 5 / beat["bpm"] # = 60 / (bpm * 12)
+sleepyTime = 5 / beat["bpm"] # = 60 / (bpm * 12) - set sleep between each write cycle
 beat = beat["tracks"]
 
-ser = serial.Serial("/dev/ttyACM0", 9600)
+ser = serial.Serial("/dev/ttyACM0", 9600) #open connection with arduino
 ser.open()
 
 print("waiting for arduino")

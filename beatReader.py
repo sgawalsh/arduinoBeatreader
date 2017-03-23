@@ -15,8 +15,8 @@ beatDic = {
 "fr":"000000000000000000000000000000000000000000000000",
 }
 
-class beat:
-	def __init__(self,bpm,beatTracks):
+class beat: #beat class, contains bpm, and tracks
+	def __init__(self, bpm, beatTracks):
 		self.bpm = bpm
 		self.beatTracks = beatTracks
 
@@ -31,7 +31,7 @@ with open("notes.txt") as f:
 
 outLines = []
 
-for line in lines:
+for line in lines: #convert note keys from 'notes.txt' to strings/tracks
 	thisLine = ''
 	noteString = ''
 	for note in line:
@@ -53,14 +53,14 @@ for line in lines:
 
 lineLen = len(outLines[0])
 
-for i in range(1,len(outLines)):
+for i in range(1, len(outLines)): #verify all tracks have the same length
 	if len(outLines[i]) != lineLen:
 		print("Line lengths are unequal, line 0 has length {0} and line {1} has length {2}".format(lineLen, i, len(outLines[i])))
 
 bpm = int(input("bpm pls\n> "))
 name = input("beat name pls\n> ")
 
-with open("jsonBeats.txt", "r") as f:
+with open("jsonBeats.txt", "r") as f: #load dictionary of beats
 	beatsDic = json.load(f)
 
 while True:
@@ -68,7 +68,7 @@ while True:
 		name = input("Name taken, please choose another names for this beat.\n> ")
 	else: break
 
-beatsDic[name] = {"bpm": bpm, "trackNum": len(outLines), "tracks": outLines}
+beatsDic[name] = {"bpm": bpm, "trackNum": len(outLines), "tracks": outLines} #assign new beat to dictionary
 
 with open("jsonBeats.txt", "w") as f:
 	json.dump(beatsDic, f)
